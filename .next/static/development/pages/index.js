@@ -61483,13 +61483,12 @@ module.exports = function(module) {
 /*!****************************!*\
   !*** ./pages/Home/Home.js ***!
   \****************************/
-/*! exports provided: Home */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Home", function() { return connectedApp; });
-/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime/helpers/esm/classCallCheck.js");
 /* harmony import */ var _babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/createClass */ "./node_modules/@babel/runtime/helpers/esm/createClass.js");
 /* harmony import */ var _babel_runtime_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inherits */ "./node_modules/@babel/runtime/helpers/esm/inherits.js");
 /* harmony import */ var _babel_runtime_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js");
@@ -61530,85 +61529,11 @@ var Home = /*#__PURE__*/function (_Component) {
   }]);
 
   return Home;
-}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
-
-var connectedApp = Object(react_redux__WEBPACK_IMPORTED_MODULE_6__["connect"])(function (state) {
-  return state;
-})(Home);
+}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]); //const connectedApp = connect(state => state)(Home);
+//export { connectedApp as Home };
 
 
-;
-    var _a, _b;
-    // Legacy CSS implementations will `eval` browser code in a Node.js context
-    // to extract CSS. For backwards compatibility, we need to check we're in a
-    // browser context before continuing.
-    if (typeof self !== 'undefined' &&
-        // AMP / No-JS mode does not inject these helpers:
-        '$RefreshHelpers$' in self) {
-        var currentExports_1 = module.__proto__.exports;
-        var prevExports = (_b = (_a = module.hot.data) === null || _a === void 0 ? void 0 : _a.prevExports) !== null && _b !== void 0 ? _b : null;
-        // This cannot happen in MainTemplate because the exports mismatch between
-        // templating and execution.
-        self.$RefreshHelpers$.registerExportsForReactRefresh(currentExports_1, module.i);
-        // A module can be accepted automatically based on its exports, e.g. when
-        // it is a Refresh Boundary.
-        if (self.$RefreshHelpers$.isReactRefreshBoundary(currentExports_1)) {
-            // Save the previous exports on update so we can compare the boundary
-            // signatures.
-            module.hot.dispose(function (data) {
-                data.prevExports = currentExports_1;
-            });
-            // Unconditionally accept an update to this module, we'll check if it's
-            // still a Refresh Boundary later.
-            module.hot.accept();
-            // This field is set when the previous version of this module was a
-            // Refresh Boundary, letting us know we need to check for invalidation or
-            // enqueue an update.
-            if (prevExports !== null) {
-                // A boundary can become ineligible if its exports are incompatible
-                // with the previous exports.
-                //
-                // For example, if you add/remove/change exports, we'll want to
-                // re-execute the importing modules, and force those components to
-                // re-render. Similarly, if you convert a class component to a
-                // function, we want to invalidate the boundary.
-                if (self.$RefreshHelpers$.shouldInvalidateReactRefreshBoundary(prevExports, currentExports_1)) {
-                    module.hot.invalidate();
-                }
-                else {
-                    self.$RefreshHelpers$.scheduleUpdate();
-                }
-            }
-        }
-        else {
-            // Since we just executed the code for the module, it's possible that the
-            // new exports made it ineligible for being a boundary.
-            // We only care about the case when we were _previously_ a boundary,
-            // because we already accepted this update (accidental side effect).
-            var isNoLongerABoundary = prevExports !== null;
-            if (isNoLongerABoundary) {
-                module.hot.invalidate();
-            }
-        }
-    }
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
-
-/***/ }),
-
-/***/ "./pages/Home/index.js":
-/*!*****************************!*\
-  !*** ./pages/Home/index.js ***!
-  \*****************************/
-/*! exports provided: Home */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home */ "./pages/Home/Home.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Home", function() { return _Home__WEBPACK_IMPORTED_MODULE_0__["Home"]; });
-
-
+/* harmony default export */ __webpack_exports__["default"] = (Home);
 
 ;
     var _a, _b;
@@ -61687,7 +61612,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/Layout */ "./components/Layout.js");
-/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Home */ "./pages/Home/index.js");
+/* harmony import */ var _Home_Home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Home/Home */ "./pages/Home/Home.js");
 
 
 
@@ -61718,7 +61643,7 @@ var App = /*#__PURE__*/function (_React$Component) {
   Object(_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(App, [{
     key: "render",
     value: function render() {
-      return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_7__["default"], null, __jsx(_Home__WEBPACK_IMPORTED_MODULE_8__["Home"], null));
+      return __jsx(_components_Layout__WEBPACK_IMPORTED_MODULE_7__["default"], null, __jsx(_Home_Home__WEBPACK_IMPORTED_MODULE_8__["default"], null));
     }
   }]);
 
