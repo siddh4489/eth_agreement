@@ -1,0 +1,1 @@
+{"ast":null,"code":"//Action Types\nexport var INCREMENT_COUNTER = \"incrementCounter\";\nexport var DECREMENT_COUNTER = \"decrementCounter\";\nexport var RESET = \"reset\";","map":null,"metadata":{},"sourceType":"module"}

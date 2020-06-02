@@ -506,7 +506,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
   return __jsx("div", null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("link", {
     rel: "stylesheet",
     href: "//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-  })), props.children, __jsx(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  })), __jsx(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), props.children);
 });
 
 /***/ }),
@@ -524,20 +524,64 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Header */ "./components/Header.js");
+/* harmony import */ var _redux_actions_counterActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../redux/actions/counterActions */ "./redux/actions/counterActions.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
 
 
 
 class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  render() {
-    return __jsx("div", null, "Home");
+  //test
+  static getInitialProps({
+    store
+  }) {}
+
+  constructor(props) {
+    super(props);
+
+    _defineProperty(this, "incrementCounter_rt", () => {
+      alert(1);
+      alert(this.props.counter.mathVal);
+      this.props.incrementCounter({
+        value: this.props.counter.mathVal
+      }, 'incrementCounter');
+    });
   }
 
-} //const connectedApp = connect(state => state)(Home);
-//export { connectedApp as Home };
+  render() {
+    /*function incrementCounter_rt() {
+      this.props.incrementCounter(
+        {value: this.props.counter.mathVal},
+        'incrementCounter'
+      );
+    }*/
+    return __jsx("div", null, __jsx("button", {
+      onClick: this.incrementCounter_rt
+    }, "Increment"), __jsx("button", {
+      onClick: this.props.decrementCounter_rt
+    }, "Decrement"), __jsx("button", {
+      onClick: this.props.reset_rt
+    }, "Reset"), __jsx("button", {
+      onClick: this.props.reset_rt
+    }, "Add"), __jsx("h1", null, this.props.counter.mathVal));
+  }
 
+}
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+const mapStateToProps = state => ({//counter: state.counter.mathVal
+});
+
+const mapDispatchToProps = {//incrementCounter_rt: incrementCounter,
+  //decrementCounter_rt: decrementCounter,
+  // reset_rt: reset,
+}; //export default connect(mapStateToProps, mapDispatchToProps)(Home);
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(state => state, _redux_actions_counterActions__WEBPACK_IMPORTED_MODULE_3__["default"])(Home)); //export default Home;
 
 /***/ }),
 
@@ -570,6 +614,100 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(state => state)(App));
+
+/***/ }),
+
+/***/ "./redux/actionType.js":
+/*!*****************************!*\
+  !*** ./redux/actionType.js ***!
+  \*****************************/
+/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET, INIT */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_COUNTER", function() { return INCREMENT_COUNTER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_COUNTER", function() { return DECREMENT_COUNTER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET", function() { return RESET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INIT", function() { return INIT; });
+//Action Types
+const INCREMENT_COUNTER = "incrementCounter";
+const DECREMENT_COUNTER = "decrementCounter";
+const RESET = "reset";
+const INIT = "init"; //Action Creator
+
+/*export const incrementCounter = () => ({
+   type: INCREMENT_COUNTER
+});
+
+export const decrementCounter = () => ({
+    type: DECREMENT_COUNTER
+});
+
+export const reset = () => ({
+    type: RESET
+});*/
+
+/***/ }),
+
+/***/ "./redux/actions/counterActions.js":
+/*!*****************************************!*\
+  !*** ./redux/actions/counterActions.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actionType__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actionType */ "./redux/actionType.js");
+
+
+const incrementCounter = ({
+  value
+}, type) => {
+  return dispatch => {
+    dispatch({
+      type: _actionType__WEBPACK_IMPORTED_MODULE_0__["INCREMENT_COUNTER"],
+      payload: value + 1
+    });
+  };
+};
+
+const decrementCounter = ({
+  value
+}, type) => {
+  return dispatch => {
+    dispatch({
+      type: _actionType__WEBPACK_IMPORTED_MODULE_0__["DECREMENT_COUNTER"],
+      payload: value - 1
+    });
+  };
+};
+
+const reset = type => {
+  return dispatch => {
+    dispatch({
+      type: _actionType__WEBPACK_IMPORTED_MODULE_0__["RESET"],
+      payload: 0
+    });
+  };
+};
+
+const init = type => {
+  return dispatch => {
+    dispatch({
+      type: _actionType__WEBPACK_IMPORTED_MODULE_0__["INIT"],
+      payload: 0
+    });
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  incrementCounter,
+  decrementCounter,
+  reset,
+  init
+});
 
 /***/ }),
 

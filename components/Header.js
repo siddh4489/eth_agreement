@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React  from 'react';
 import {
   Button,
   Container,
@@ -15,7 +15,11 @@ import {
   Visibility
 } from "semantic-ui-react";
 import { Link } from '../routes';
+
+ 
+
 const HomepageHeading = ({ mobile }) => (
+  
   <Container text>
     <Header
       as='h1'
@@ -48,7 +52,7 @@ const HomepageHeading = ({ mobile }) => (
 
 class DesktopContainer extends React.Component {
   state = {}
-
+  
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
 
@@ -84,7 +88,7 @@ class DesktopContainer extends React.Component {
                 <Menu.Item as='a'>Plan Trip</Menu.Item>
                 <Menu.Item as='a'>Sommelier</Menu.Item>
                 <Menu.Item position='right'>
-                  <Button as='a' inverted={!fixed}>
+                  <Button as='a'  inverted={!fixed}>
                     Log in
                   </Button>
                   <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
@@ -96,7 +100,6 @@ class DesktopContainer extends React.Component {
             <HomepageHeading />
           </Segment>
         </Visibility>
-
         {children}
       </Responsive>
     )
@@ -107,7 +110,7 @@ class DesktopContainer extends React.Component {
 
 class MobileContainer extends React.Component {
   state = {}
-
+  
   handlePusherClick = () => {
     const { sidebarOpened } = this.state
 
@@ -117,6 +120,7 @@ class MobileContainer extends React.Component {
   handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened })
 
   render() {
+    
     const { children } = this.props
     const { sidebarOpened } = this.state
 
@@ -304,7 +308,6 @@ const HomepageLayout = () => (
     </Segment>
   </ResponsiveContainer>
 )
-
 
 export default () => {
   return (

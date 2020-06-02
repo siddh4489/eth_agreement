@@ -1,13 +1,20 @@
-import {DECREMENT_COUNTER, INCREMENT_COUNTER} from '../actions/counterActions';
+import {DECREMENT_COUNTER, INCREMENT_COUNTER,RESET,INIT} from '../actionType';
 
-const counterReducer = (state = {value: 0}, action) => {
+const initialState = {
+    mathVal: 0,
+  };
+const counterReducer = (state = initialState, action) => {
     switch (action.type) {
         case INCREMENT_COUNTER:
-            return {...state, value: state.value + 1};
+            return Object.assign({}, state, { mathVal: action.payload });
         case DECREMENT_COUNTER:
-            return {...state, value: state.value - 1};
+            return Object.assign({}, state, { mathVal: action.payload });
+        case RESET:
+            return Object.assign({}, state, { mathVal: action.payload });
+        case INIT:
+                return Object.assign({}, state, { mathVal: action.payload });    
         default:
-            return {...state};
+            return state;
     }
 };
 

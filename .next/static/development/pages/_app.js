@@ -292,33 +292,6 @@ function _createClass(Constructor, protoProps, staticProps) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js ***!
@@ -7764,33 +7737,36 @@ var makeStore = function makeStore() {
 
 /***/ }),
 
-/***/ "./redux/actions/counterActions.js":
-/*!*****************************************!*\
-  !*** ./redux/actions/counterActions.js ***!
-  \*****************************************/
-/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, incrementCounter, decrementCounter */
+/***/ "./redux/actionType.js":
+/*!*****************************!*\
+  !*** ./redux/actionType.js ***!
+  \*****************************/
+/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET, INIT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_COUNTER", function() { return INCREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_COUNTER", function() { return DECREMENT_COUNTER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "incrementCounter", function() { return incrementCounter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "decrementCounter", function() { return decrementCounter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET", function() { return RESET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INIT", function() { return INIT; });
 //Action Types
-var INCREMENT_COUNTER = "INCREMENT_COUNTER";
-var DECREMENT_COUNTER = "DECREMENT_COUNTER"; //Action Creator
+var INCREMENT_COUNTER = "incrementCounter";
+var DECREMENT_COUNTER = "decrementCounter";
+var RESET = "reset";
+var INIT = "init"; //Action Creator
 
-var incrementCounter = function incrementCounter() {
-  return {
-    type: INCREMENT_COUNTER
-  };
-};
-var decrementCounter = function decrementCounter() {
-  return {
+/*export const incrementCounter = () => ({
+   type: INCREMENT_COUNTER
+});
+
+export const decrementCounter = () => ({
     type: DECREMENT_COUNTER
-  };
-};
+});
+
+export const reset = () => ({
+    type: RESET
+});*/
 
 ;
     var _a, _b;
@@ -7847,7 +7823,7 @@ var decrementCounter = function decrementCounter() {
         }
     }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
@@ -7860,35 +7836,39 @@ var decrementCounter = function decrementCounter() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _actions_counterActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/counterActions */ "./redux/actions/counterActions.js");
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var _actionType__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actionType */ "./redux/actionType.js");
 
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-
+var initialState = {
+  mathVal: 0
+};
 
 var counterReducer = function counterReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    value: 0
-  };
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actions_counterActions__WEBPACK_IMPORTED_MODULE_1__["INCREMENT_COUNTER"]:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        value: state.value + 1
+    case _actionType__WEBPACK_IMPORTED_MODULE_0__["INCREMENT_COUNTER"]:
+      return Object.assign({}, state, {
+        mathVal: action.payload
       });
 
-    case _actions_counterActions__WEBPACK_IMPORTED_MODULE_1__["DECREMENT_COUNTER"]:
-      return _objectSpread(_objectSpread({}, state), {}, {
-        value: state.value - 1
+    case _actionType__WEBPACK_IMPORTED_MODULE_0__["DECREMENT_COUNTER"]:
+      return Object.assign({}, state, {
+        mathVal: action.payload
+      });
+
+    case _actionType__WEBPACK_IMPORTED_MODULE_0__["RESET"]:
+      return Object.assign({}, state, {
+        mathVal: action.payload
+      });
+
+    case _actionType__WEBPACK_IMPORTED_MODULE_0__["INIT"]:
+      return Object.assign({}, state, {
+        mathVal: action.payload
       });
 
     default:
-      return _objectSpread({}, state);
+      return state;
   }
 };
 
