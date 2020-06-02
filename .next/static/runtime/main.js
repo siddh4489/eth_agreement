@@ -3071,7 +3071,7 @@ function parseStack(stack) {
             var url = new URL(frame.file);
             var res = regexNextStatic.exec(url.pathname);
             if (res) {
-                var distDir = (_b = (_a = "D:\\eth_agreement\\.next") === null || _a === void 0 ? void 0 : _a.replace(/\\/g, '/')) === null || _b === void 0 ? void 0 : _b.replace(/\/$/, '');
+                var distDir = (_b = (_a = "D:\\BlockChain\\eth_agreement\\.next") === null || _a === void 0 ? void 0 : _a.replace(/\\/g, '/')) === null || _b === void 0 ? void 0 : _b.replace(/\/$/, '');
                 if (distDir) {
                     frame.file = 'file://' + distDir.concat(res.pop());
                 }
