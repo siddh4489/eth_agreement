@@ -10,6 +10,5 @@ class Home extends Component {
 
 }
 
+export default connect(state => state)(Home);
 
-const connectedApp = connect(state => state)(Home);
-export { connectedApp as Home };
