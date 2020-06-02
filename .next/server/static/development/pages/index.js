@@ -545,11 +545,21 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     super(props);
 
     _defineProperty(this, "incrementCounter_rt", () => {
-      alert(1);
-      alert(this.props.counter.mathVal);
       this.props.incrementCounter({
         value: this.props.counter.mathVal
-      }, 'incrementCounter');
+      }, 'incrementCounterType');
+    });
+
+    _defineProperty(this, "decrementCounter_rt", () => {
+      this.props.decrementCounter({
+        value: this.props.counter.mathVal
+      }, 'decrementCounterType');
+    });
+
+    _defineProperty(this, "reset_rt", () => {
+      this.props.reset({
+        value: this.props.counter.mathVal
+      }, 'resetType');
     });
   }
 
@@ -563,11 +573,11 @@ class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return __jsx("div", null, __jsx("button", {
       onClick: this.incrementCounter_rt
     }, "Increment"), __jsx("button", {
-      onClick: this.props.decrementCounter_rt
+      onClick: this.decrementCounter_rt
     }, "Decrement"), __jsx("button", {
-      onClick: this.props.reset_rt
+      onClick: this.reset_rt
     }, "Reset"), __jsx("button", {
-      onClick: this.props.reset_rt
+      onClick: this.reset_rt
     }, "Add"), __jsx("h1", null, this.props.counter.mathVal));
   }
 
@@ -621,7 +631,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 /*!*****************************!*\
   !*** ./redux/actionType.js ***!
   \*****************************/
-/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET, INIT */
+/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -629,12 +639,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_COUNTER", function() { return INCREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_COUNTER", function() { return DECREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET", function() { return RESET; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INIT", function() { return INIT; });
 //Action Types
-const INCREMENT_COUNTER = "incrementCounter";
-const DECREMENT_COUNTER = "decrementCounter";
-const RESET = "reset";
-const INIT = "init"; //Action Creator
+const INCREMENT_COUNTER = "incrementCounterType";
+const DECREMENT_COUNTER = "decrementCounterType";
+const RESET = "resetType"; //Action Creator
 
 /*export const incrementCounter = () => ({
    type: INCREMENT_COUNTER
@@ -693,20 +701,10 @@ const reset = type => {
   };
 };
 
-const init = type => {
-  return dispatch => {
-    dispatch({
-      type: _actionType__WEBPACK_IMPORTED_MODULE_0__["INIT"],
-      payload: 0
-    });
-  };
-};
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   incrementCounter,
   decrementCounter,
-  reset,
-  init
+  reset
 });
 
 /***/ }),

@@ -1,4 +1,4 @@
-import {DECREMENT_COUNTER, INCREMENT_COUNTER,RESET,INIT} from '../actionType';
+import {DECREMENT_COUNTER, INCREMENT_COUNTER,RESET} from '../actionType';
 
 const initialState = {
     mathVal: 0,
@@ -11,8 +11,6 @@ const counterReducer = (state = initialState, action) => {
             return Object.assign({}, state, { mathVal: action.payload });
         case RESET:
             return Object.assign({}, state, { mathVal: action.payload });
-        case INIT:
-                return Object.assign({}, state, { mathVal: action.payload });    
         default:
             return state;
     }

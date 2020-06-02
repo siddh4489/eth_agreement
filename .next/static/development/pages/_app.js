@@ -6782,6 +6782,40 @@ module.exports = (__webpack_require__(/*! dll-reference dll_e173d1c006a53eda1d28
 
 /***/ }),
 
+/***/ "./node_modules/redux-thunk/lib/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/redux-thunk/lib/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+function createThunkMiddleware(extraArgument) {
+  return function (_ref) {
+    var dispatch = _ref.dispatch,
+        getState = _ref.getState;
+    return function (next) {
+      return function (action) {
+        if (typeof action === 'function') {
+          return action(dispatch, getState, extraArgument);
+        }
+
+        return next(action);
+      };
+    };
+  };
+}
+
+var thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+exports['default'] = thunk;
+
+/***/ }),
+
 /***/ "./node_modules/redux/es/redux.js":
 /*!****************************************!*\
   !*** ./node_modules/redux/es/redux.js ***!
@@ -7741,7 +7775,7 @@ var makeStore = function makeStore() {
 /*!*****************************!*\
   !*** ./redux/actionType.js ***!
   \*****************************/
-/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET, INIT */
+/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7749,12 +7783,10 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_COUNTER", function() { return INCREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_COUNTER", function() { return DECREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET", function() { return RESET; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INIT", function() { return INIT; });
 //Action Types
-var INCREMENT_COUNTER = "incrementCounter";
-var DECREMENT_COUNTER = "decrementCounter";
-var RESET = "reset";
-var INIT = "init"; //Action Creator
+var INCREMENT_COUNTER = "incrementCounterType";
+var DECREMENT_COUNTER = "decrementCounterType";
+var RESET = "resetType"; //Action Creator
 
 /*export const incrementCounter = () => ({
    type: INCREMENT_COUNTER
@@ -7858,11 +7890,6 @@ var counterReducer = function counterReducer() {
       });
 
     case _actionType__WEBPACK_IMPORTED_MODULE_0__["RESET"]:
-      return Object.assign({}, state, {
-        mathVal: action.payload
-      });
-
-    case _actionType__WEBPACK_IMPORTED_MODULE_0__["INIT"]:
       return Object.assign({}, state, {
         mathVal: action.payload
       });
@@ -8020,10 +8047,13 @@ var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"])(
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _reducers_rootReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducers/rootReducer */ "./redux/reducers/rootReducer.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/lib/index.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _reducers_rootReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./reducers/rootReducer */ "./redux/reducers/rootReducer.js");
 
 
-var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_1___default.a));
 /* harmony default export */ __webpack_exports__["default"] = (store);
 
 ;

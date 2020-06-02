@@ -14,13 +14,23 @@ static getInitialProps({store}) {}
  }
 
  incrementCounter_rt = () => {
-    alert(1);
-    alert(this.props.counter.mathVal);
     this.props.incrementCounter(
       {value: this.props.counter.mathVal},
-      'incrementCounter'
+      'incrementCounterType'
     );
  }  
+ decrementCounter_rt = () => {
+  this.props.decrementCounter(
+    {value: this.props.counter.mathVal},
+    'decrementCounterType'
+  );
+}  
+reset_rt = () => {
+  this.props.reset(
+    {value: this.props.counter.mathVal},
+    'resetType'
+  );
+}  
  
   render(){
     /*function incrementCounter_rt() {
@@ -32,9 +42,9 @@ static getInitialProps({store}) {}
     return(
           <div>
               <button onClick={this.incrementCounter_rt}>Increment</button>
-              <button onClick={this.props.decrementCounter_rt}>Decrement</button>
-              <button onClick={this.props.reset_rt}>Reset</button>
-              <button onClick={this.props.reset_rt}>Add</button>
+              <button onClick={this.decrementCounter_rt}>Decrement</button>
+              <button onClick={this.reset_rt}>Reset</button>
+              <button onClick={this.reset_rt}>Add</button>
               <h1>{this.props.counter.mathVal}</h1>
           </div>
     );  

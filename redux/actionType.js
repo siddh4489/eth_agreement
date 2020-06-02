@@ -1,8 +1,7 @@
 //Action Types
-export const INCREMENT_COUNTER = "incrementCounter";
-export const DECREMENT_COUNTER = "decrementCounter";
-export const RESET = "reset";
-export const INIT = "init";
+export const INCREMENT_COUNTER = "incrementCounterType";
+export const DECREMENT_COUNTER = "decrementCounterType";
+export const RESET = "resetType";
 
 
 //Action Creator

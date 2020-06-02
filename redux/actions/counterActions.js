@@ -1,4 +1,4 @@
-import {INCREMENT_COUNTER,DECREMENT_COUNTER,RESET,INIT} from '../actionType';
+import {INCREMENT_COUNTER,DECREMENT_COUNTER,RESET} from '../actionType';
 
 const incrementCounter = ({value}, type) => {
     return (dispatch) => {
@@ -18,16 +18,9 @@ const reset = (type) => {
     };
 };
 
-const init = (type) => {
-    return (dispatch) => {
-        dispatch({type: INIT, payload: 0});
-    };
-};
-
 
 export default {
     incrementCounter,
     decrementCounter,
     reset,
-    init,
   };

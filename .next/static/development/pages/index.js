@@ -61539,12 +61539,21 @@ var Home = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
 
     Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__["default"])(_this), "incrementCounter_rt", function () {
-      alert(1);
-      alert(_this.props.counter.mathVal);
-
       _this.props.incrementCounter({
         value: _this.props.counter.mathVal
-      }, 'incrementCounter');
+      }, 'incrementCounterType');
+    });
+
+    Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__["default"])(_this), "decrementCounter_rt", function () {
+      _this.props.decrementCounter({
+        value: _this.props.counter.mathVal
+      }, 'decrementCounterType');
+    });
+
+    Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_1__["default"])(_this), "reset_rt", function () {
+      _this.props.reset({
+        value: _this.props.counter.mathVal
+      }, 'resetType');
     });
 
     return _this;
@@ -61562,11 +61571,11 @@ var Home = /*#__PURE__*/function (_Component) {
       return __jsx("div", null, __jsx("button", {
         onClick: this.incrementCounter_rt
       }, "Increment"), __jsx("button", {
-        onClick: this.props.decrementCounter_rt
+        onClick: this.decrementCounter_rt
       }, "Decrement"), __jsx("button", {
-        onClick: this.props.reset_rt
+        onClick: this.reset_rt
       }, "Reset"), __jsx("button", {
-        onClick: this.props.reset_rt
+        onClick: this.reset_rt
       }, "Add"), __jsx("h1", null, this.props.counter.mathVal));
     }
   }]);
@@ -61770,7 +61779,7 @@ var App = /*#__PURE__*/function (_React$Component) {
 /*!*****************************!*\
   !*** ./redux/actionType.js ***!
   \*****************************/
-/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET, INIT */
+/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61778,12 +61787,10 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_COUNTER", function() { return INCREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_COUNTER", function() { return DECREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET", function() { return RESET; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INIT", function() { return INIT; });
 //Action Types
-var INCREMENT_COUNTER = "incrementCounter";
-var DECREMENT_COUNTER = "decrementCounter";
-var RESET = "reset";
-var INIT = "init"; //Action Creator
+var INCREMENT_COUNTER = "incrementCounterType";
+var DECREMENT_COUNTER = "decrementCounterType";
+var RESET = "resetType"; //Action Creator
 
 /*export const incrementCounter = () => ({
    type: INCREMENT_COUNTER
@@ -61897,20 +61904,10 @@ var reset = function reset(type) {
   };
 };
 
-var init = function init(type) {
-  return function (dispatch) {
-    dispatch({
-      type: _actionType__WEBPACK_IMPORTED_MODULE_0__["INIT"],
-      payload: 0
-    });
-  };
-};
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   incrementCounter: incrementCounter,
   decrementCounter: decrementCounter,
-  reset: reset,
-  init: init
+  reset: reset
 });
 
 ;
