@@ -11,6 +11,7 @@ export default props => {
         />
         
       </Head>
+      {props.children}
       <Header />
     </div>
   );

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -108,8 +108,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var semantic_ui_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes */ "./routes.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "lodash");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -118,135 +116,370 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-const NavBarMobile = ({
-  children,
-  leftItems,
-  onPusherClick,
-  onToggle,
-  rightItems,
-  visible
-}) => __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Sidebar"].Pushable, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Sidebar"], {
-  as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"],
-  animation: "overlay",
-  icon: "labeled",
-  inverted: true,
-  items: leftItems,
-  vertical: true,
-  visible: visible
-}), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Sidebar"].Pusher, {
-  dimmed: visible,
-  onClick: onPusherClick,
-  style: {
-    minHeight: "100vh"
-  }
-}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
-  fixed: "top",
-  inverted: true
-}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Image"], {
-  size: "mini",
-  src: "https://react.semantic-ui.com/logo.png"
-})), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
-  onClick: onToggle
-}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
-  name: "sidebar"
-})), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Menu, {
-  position: "right"
-}, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(rightItems, item => __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, item)))), children));
-
-const NavBarDesktop = ({
-  leftItems,
-  rightItems
-}) => __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
-  fixed: "top",
-  inverted: true
-}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Image"], {
-  size: "mini",
-  src: "https://react.semantic-ui.com/logo.png"
-})), lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(leftItems, item => __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, item)), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Menu, {
-  position: "right"
-}, lodash__WEBPACK_IMPORTED_MODULE_3___default.a.map(rightItems, item => __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, item))));
-
-const NavBarChildren = ({
-  children
+const HomepageHeading = ({
+  mobile
 }) => __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Container"], {
+  text: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h1",
+  content: "Wine Tripping",
+  inverted: true,
   style: {
-    marginTop: "5em"
+    fontSize: mobile ? '2em' : '4em',
+    fontWeight: 'normal',
+    marginBottom: 0,
+    marginTop: mobile ? '1.5em' : '3em'
   }
-}, children);
+}), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h2",
+  content: "Find your favorite region with us...",
+  inverted: true,
+  style: {
+    fontSize: mobile ? '1.5em' : '1.7em',
+    fontWeight: 'normal',
+    marginTop: mobile ? '0.5em' : '1.5em'
+  }
+}), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  primary: true,
+  size: "huge"
+}, "Plan a trip", __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+  name: "right arrow"
+})));
 
-class NavBar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+class DesktopContainer extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor(...args) {
     super(...args);
 
-    _defineProperty(this, "state", {
-      visible: false
-    });
+    _defineProperty(this, "state", {});
 
-    _defineProperty(this, "handlePusher", () => {
-      const {
-        visible
-      } = this.state;
-      alert(visible);
-      if (visible) this.setState({
-        visible: false
-      });
-    });
+    _defineProperty(this, "hideFixedMenu", () => this.setState({
+      fixed: false
+    }));
 
-    _defineProperty(this, "handleToggle", () => this.setState({
-      visible: !this.state.visible
+    _defineProperty(this, "showFixedMenu", () => this.setState({
+      fixed: true
     }));
   }
 
   render() {
     const {
-      leftItems,
-      rightItems
+      children
     } = this.props;
     const {
-      visible
+      fixed
     } = this.state;
-    return __jsx("div", null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"], semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"].onlyMobile, __jsx(NavBarMobile, {
-      leftItems: leftItems,
-      onPusherClick: this.handlePusher,
-      onToggle: this.handleToggle,
-      rightItems: rightItems,
-      visible: visible
-    }, __jsx(NavBarChildren, null, "-"))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"], {
-      minWidth: semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"].onlyTablet.minWidth
-    }, __jsx(NavBarDesktop, {
-      leftItems: leftItems,
-      rightItems: rightItems
-    }), __jsx(NavBarChildren, null, "--")));
+    return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"], semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"].onlyComputer, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Visibility"], {
+      once: false,
+      onBottomPassed: this.showFixedMenu,
+      onBottomPassedReverse: this.hideFixedMenu
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Segment"], {
+      inverted: true,
+      textAlign: "center",
+      style: {
+        minHeight: 700,
+        padding: '1em 0em'
+      },
+      vertical: true
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
+      fixed: fixed ? 'top' : null,
+      inverted: !fixed,
+      pointing: !fixed,
+      secondary: !fixed,
+      size: "large"
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a",
+      active: true
+    }, "Home"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Explore"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Plan Trip"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Sommelier"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      position: "right"
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      as: "a",
+      inverted: !fixed
+    }, "Log in"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      as: "a",
+      inverted: !fixed,
+      primary: fixed,
+      style: {
+        marginLeft: '0.5em'
+      }
+    }, "Sign Up")))), __jsx(HomepageHeading, null))), children);
   }
 
 }
 
-const leftItems = [{
+class MobileContainer extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "state", {});
+
+    _defineProperty(this, "handlePusherClick", () => {
+      const {
+        sidebarOpened
+      } = this.state;
+      if (sidebarOpened) this.setState({
+        sidebarOpened: false
+      });
+    });
+
+    _defineProperty(this, "handleToggle", () => this.setState({
+      sidebarOpened: !this.state.sidebarOpened
+    }));
+  }
+
+  render() {
+    const {
+      children
+    } = this.props;
+    const {
+      sidebarOpened
+    } = this.state;
+    return __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"], semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Responsive"].onlyMobile, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Sidebar"].Pushable, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Sidebar"], {
+      as: semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"],
+      animation: "uncover",
+      inverted: true,
+      vertical: true,
+      visible: sidebarOpened
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a",
+      active: true
+    }, "Home"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Explore"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Plan Trip"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Sommelier"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Log in"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      as: "a"
+    }, "Sign Up")), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Sidebar"].Pusher, {
+      dimmed: sidebarOpened,
+      onClick: this.handlePusherClick,
+      style: {
+        minHeight: '100vh'
+      }
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Segment"], {
+      inverted: true,
+      textAlign: "center",
+      style: {
+        minHeight: 350,
+        padding: '1em 0em'
+      },
+      vertical: true
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"], {
+      inverted: true,
+      pointing: true,
+      secondary: true,
+      size: "large"
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      onClick: this.handleToggle
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Icon"], {
+      name: "sidebar"
+    })), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Menu"].Item, {
+      position: "right"
+    }, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      as: "a",
+      inverted: true
+    }, "Log in"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+      as: "a",
+      inverted: true,
+      style: {
+        marginLeft: '0.5em'
+      }
+    }, "Sign Up")))), __jsx(HomepageHeading, {
+      mobile: true
+    })), children)));
+  }
+
+}
+
+const ResponsiveContainer = ({
+  children
+}) => __jsx("div", null, __jsx(DesktopContainer, null, children), __jsx(MobileContainer, null, children));
+
+const HomepageLayout = () => __jsx(ResponsiveContainer, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Segment"], {
+  style: {
+    padding: '8em 0em'
+  },
+  vertical: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+  container: true,
+  stackable: true,
+  verticalAlign: "middle"
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  width: 8
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h3",
+  style: {
+    fontSize: '2em'
+  }
+}, "With over XXX vineyards let us guide you"), __jsx("p", {
+  style: {
+    fontSize: '1.33em'
+  }
+}, "We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs... through pure data analytics."), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h3",
+  style: {
+    fontSize: '2em'
+  }
+}, "We Make Bananas That Can Dance"), __jsx("p", {
+  style: {
+    fontSize: '1.33em'
+  }
+}, "Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.")), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  floated: "right",
+  width: 6
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Image"], {
+  bordered: true,
+  rounded: true,
+  size: "large",
+  src: "/assets/images/wireframe/white-image.png"
+}))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  textAlign: "center"
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+  size: "huge"
+}, "Check Them Out"))))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Segment"], {
+  style: {
+    padding: '0em'
+  },
+  vertical: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+  celled: "internally",
+  columns: "equal",
+  stackable: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, {
+  textAlign: "center"
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  style: {
+    paddingBottom: '5em',
+    paddingTop: '5em'
+  }
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h3",
+  style: {
+    fontSize: '2em'
+  }
+}, "\"What a Company\""), __jsx("p", {
+  style: {
+    fontSize: '1.33em'
+  }
+}, "That is what they all say about us")), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  style: {
+    paddingBottom: '5em',
+    paddingTop: '5em'
+  }
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h3",
+  style: {
+    fontSize: '2em'
+  }
+}, "\"I shouldn't have gone with their competitor.\""), __jsx("p", {
+  style: {
+    fontSize: '1.33em'
+  }
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Image"], {
+  avatar: true,
+  src: "/assets/images/avatar/large/nan.jpg"
+}), __jsx("b", null, "Nan"), " Chief Fun Officer Acme Toys"))))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Segment"], {
+  style: {
+    padding: '8em 0em'
+  },
+  vertical: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Container"], {
+  text: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h3",
+  style: {
+    fontSize: '2em'
+  }
+}, "Breaking The Grid, Grabs Your Attention"), __jsx("p", {
+  style: {
+    fontSize: '1.33em'
+  }
+}, "Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention."), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
   as: "a",
-  content: "Home",
-  key: "home"
-}, {
+  size: "large"
+}, "Read More"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Divider"], {
+  as: "h4",
+  className: "header",
+  horizontal: true,
+  style: {
+    margin: '3em 0em',
+    textTransform: 'uppercase'
+  }
+}, __jsx("a", {
+  href: "#"
+}, "Case Studies")), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h3",
+  style: {
+    fontSize: '2em'
+  }
+}, "Did We Tell You About Our Bananas?"), __jsx("p", {
+  style: {
+    fontSize: '1.33em'
+  }
+}, "Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but it's really true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance."), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Button"], {
   as: "a",
-  content: "Users",
-  key: "users"
-}];
-const rightItems = [{
-  as: "a",
-  content: "Login",
-  key: "login"
-}, {
-  as: "a",
-  content: "Register",
-  key: "register"
-}];
+  size: "large"
+}, "I'm Still Quite Interested"))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Segment"], {
+  inverted: true,
+  vertical: true,
+  style: {
+    padding: '5em 0em'
+  }
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Container"], null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"], {
+  divided: true,
+  inverted: true,
+  stackable: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Row, null, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  width: 3
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  inverted: true,
+  as: "h4",
+  content: "About"
+}), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"], {
+  link: true,
+  inverted: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "Sitemap"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "Contact Us"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "Religious Ceremonies"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "Gazebo Plans"))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  width: 3
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  inverted: true,
+  as: "h4",
+  content: "Services"
+}), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"], {
+  link: true,
+  inverted: true
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "Banana Pre-Order"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "DNA FAQ"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "How To Access"), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["List"].Item, {
+  as: "a"
+}, "Favorite X-Men"))), __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Grid"].Column, {
+  width: 7
+}, __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Header"], {
+  as: "h4",
+  inverted: true
+}, "Footer Header"), __jsx("p", null, "Extra space for a call to action inside the footer that could help re-engage users.")))))));
+
 /* harmony default export */ __webpack_exports__["default"] = (() => {
-  return __jsx(NavBar, {
-    leftItems: leftItems,
-    rightItems: rightItems
-  }, "wow", __jsx(semantic_ui_react__WEBPACK_IMPORTED_MODULE_1__["Image"], {
-    src: "https://react.semantic-ui.com/logo.png"
-  }));
+  return __jsx(HomepageLayout, null);
 });
 
 /***/ }),
@@ -273,7 +506,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
   return __jsx("div", null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("link", {
     rel: "stylesheet",
     href: "//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"
-  })), __jsx(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  })), props.children, __jsx(_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 });
 
 /***/ }),
@@ -298,7 +531,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 class Home extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   render() {
-    return __jsx("div", null, "sid");
+    return __jsx("div", null, "Home");
   }
 
 }
@@ -370,7 +603,7 @@ module.exports = routes;
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -379,17 +612,6 @@ module.exports = routes;
 
 module.exports = __webpack_require__(/*! D:\BlockChain\eth_agreement\pages\index.js */"./pages/index.js");
 
-
-/***/ }),
-
-/***/ "lodash":
-/*!*************************!*\
-  !*** external "lodash" ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("lodash");
 
 /***/ }),
 
