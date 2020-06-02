@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Layout from '../components/Layout';
-import  {Home}  from './Home';
+import  Home from './Home';
 
 class App extends React.Component {
   render() {
