@@ -5,11 +5,12 @@ import  Home from './Home/Home';
 
 class App extends React.Component {
   render() {
+    
     return (
-      <Layout>
-          <Home/>
-      </Layout>
-  );
+        <Layout>
+            <Home/>
+        </Layout>
+   );
   }
 }
 export default connect(state => state)(App);

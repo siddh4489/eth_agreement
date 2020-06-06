@@ -31,6 +31,11 @@ reset_rt = () => {
     'resetType'
   );
 }  
+callMyName_rt = () => {
+  this.props.myName(
+    'nameType'
+  );
+}  
  
   render(){
     /*function incrementCounter_rt() {
@@ -44,8 +49,9 @@ reset_rt = () => {
               <button onClick={this.incrementCounter_rt}>Increment</button>
               <button onClick={this.decrementCounter_rt}>Decrement</button>
               <button onClick={this.reset_rt}>Reset</button>
-              <button onClick={this.reset_rt}>Add</button>
+              <button onClick={this.callMyName_rt}>My Name</button>
               <h1>{this.props.counter.mathVal}</h1>
+              <h1>{this.props.counter.name}</h1>
           </div>
     );  
   }

@@ -1,4 +1,4 @@
-import {INCREMENT_COUNTER,DECREMENT_COUNTER,RESET} from '../actionType';
+import {INCREMENT_COUNTER,DECREMENT_COUNTER,RESET,MYNAME} from '../actionType';
 
 const incrementCounter = ({value}, type) => {
     return (dispatch) => {
@@ -14,7 +14,13 @@ const decrementCounter = ({value}, type) => {
 
 const reset = (type) => {
     return (dispatch) => {
-        dispatch({type: RESET, payload: 0});
+        dispatch({type: RESET, payload: 0,payloadName :'reset raj'});
+    };
+};
+
+const myName = (type) => {
+    return (dispatch) => {
+        dispatch({type: MYNAME, payload: 'Siddhraj Atodaria'});
     };
 };
 
@@ -23,4 +29,5 @@ export default {
     incrementCounter,
     decrementCounter,
     reset,
+    myName,
   };

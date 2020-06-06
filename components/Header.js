@@ -15,7 +15,11 @@ import {
   Visibility
 } from "semantic-ui-react";
 import { Link } from '../routes';
-
+import {connect} from 'react-redux';
+import actions from '../redux/actions/authActions';
+import createAuth0Client from '@auth0/auth0-spa-js';
+import HeaderSegment from './HeaderSegment'
+//import { useAuth0 } from '../../contexts/auth0-context';
  
 
 const HomepageHeading = ({ mobile }) => (
@@ -49,18 +53,119 @@ const HomepageHeading = ({ mobile }) => (
   </Container>
 )
 
+class Auth0Connection extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+       auth0Client: null,
+       isLoading: true,
+       isAuthenticated: false,
+       user: [],
+    }
+    this.config = {
+      domain: (process.env.REACT_APP_AUTH0_DOMAIN || 'dev-14avhjuy.auth0.com'),
+      client_id: (process.env.REACT_APP_AUTH0_CLIENT_ID || 'ZJ14f961zjftMYbOBnZPnEGJd3ZHyQJC'),
+      redirect_uri: 'http://localhost:3000/'
+    };
+    
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+ };
+
+ componentDidMount() {
+  this.initializeAuth0();
+}
+
+// initialize the auth0 library
+initializeAuth0 = async () => {
+  const auth0Client = await createAuth0Client(this.config);
+  console.log('auth0Client : '+JSON.stringify(auth0Client));
+  this.setState({ auth0Client });
+
+  // check to see if they have been redirected after login
+  if (window.location.search.includes('code=')) {
+    return this.handleRedirectCallback();
+  }
+
+  const isAuthenticated = await auth0Client.isAuthenticated();
+  const user = isAuthenticated ? await auth0Client.getUser() : null;
+  console.log('user : '+JSON.stringify(user));
+  
+  this.setState({ isLoading: false, isAuthenticated, user });
+};
+
+handleRedirectCallback = async () => {
+  this.setState({ isLoading: true });
+
+  await this.state.auth0Client.handleRedirectCallback();
+  const user = await this.state.auth0Client.getUser();
+
+  this.setState({ user, isAuthenticated: true, isLoading: false });
+  window.history.replaceState({}, document.title, window.location.pathname);
+};
+
+ login(e) {
+  const { auth0Client} = this.state;
+    //this.setState({data: e.target.value});
+    auth0Client.loginWithRedirect({
+      redirect_uri: 'http://localhost:3000/'
+    }).then(token => {
+      auth0Client.getUser().then(user => {
+        this.setState({ user});
+        console.log('---here--'+user);
+      });
+    });
+ }
+
+ logout(e){
+  const { auth0Client} = this.state;
+  auth0Client.logout();
+ }
+
+ render() {
+
+  
+    return (
+       <div>
+          <DesktopContainer auth0={this.state}
+             login={this.login} logout={this.logout}>
+             </DesktopContainer>
+             <MobileContainer auth0={this.state}
+             login={this.login} logout={this.logout}>
+             </MobileContainer>
+               
+       </div>
+    );
+ }
+ 
+
+  
+  
+
+} 
 
 class DesktopContainer extends React.Component {
-  state = {}
+  constructor(props) {
+    super(props);
+    
+  }  
+    
+  state = {};
   
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
 
+
   render() {
+    
+    console.log('Desktop');
     const { children } = this.props
     const { fixed } = this.state
 
+    
     return (
+      
       <Responsive {...Responsive.onlyComputer}>
         <Visibility
           once={false}
@@ -88,19 +193,38 @@ class DesktopContainer extends React.Component {
                 <Menu.Item as='a'>Plan Trip</Menu.Item>
                 <Menu.Item as='a'>Sommelier</Menu.Item>
                 <Menu.Item position='right'>
-                  <Button as='a'  inverted={!fixed}>
+                {!this.props.auth0.isLoading && !this.props.auth0.user && (
+                  <Button as='a' onClick={this.props.login}  inverted={!fixed}>
                     Log in
                   </Button>
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
+                )}
+                 {!this.props.auth0.isLoading && this.props.auth0.user && (
+                  <>
+                  <h1>{this.props.auth0.user.name}</h1>
+                  <Button as='a' onClick={this.props.logout}  inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
+                    Logout
                   </Button>
+                  </> 
+                )}   
                 </Menu.Item>
               </Container>
             </Menu>
+            {!this.props.auth0.isLoading && this.props.auth0.user && (
+              <>
+                <h1>You are logged in!</h1>
+                <p>Hello {this.props.auth0.user.name}--{this.props.auth0.user.email}--</p>
+                {this.props.auth0.user.picture && <img src={this.props.auth0.user.picture} alt="My Avatar" />}
+                
+              </>
+            )}
+            {!this.props.auth0.isLoading && !this.props.auth0.user && (
             <HomepageHeading />
+            )}
           </Segment>
         </Visibility>
-        {children}
+        {!this.props.auth0.isLoading && !this.props.auth0.user && (
+        <HeaderSegment></HeaderSegment>
+        )}
       </Responsive>
     )
   }
@@ -109,6 +233,10 @@ class DesktopContainer extends React.Component {
 
 
 class MobileContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    
+  } 
   state = {}
   
   handlePusherClick = () => {
@@ -120,7 +248,7 @@ class MobileContainer extends React.Component {
   handleToggle = () => this.setState({ sidebarOpened: !this.state.sidebarOpened })
 
   render() {
-    
+    console.log('mobile');
     const { children } = this.props
     const { sidebarOpened } = this.state
 
@@ -134,8 +262,12 @@ class MobileContainer extends React.Component {
             <Menu.Item as='a'>Explore</Menu.Item>
             <Menu.Item as='a'>Plan Trip</Menu.Item>
             <Menu.Item as='a'>Sommelier</Menu.Item>
-            <Menu.Item as='a'>Log in</Menu.Item>
-            <Menu.Item as='a'>Sign Up</Menu.Item>
+            {!this.props.auth0.isLoading && !this.props.auth0.user && (
+            <Menu.Item as='a' onClick={this.props.login}>Log in</Menu.Item>
+            )}
+            {!this.props.auth0.isLoading && this.props.auth0.user && (
+            <Menu.Item as='a' onClick={this.props.logout}>Logout</Menu.Item>
+            )}
           </Sidebar>
 
           <Sidebar.Pusher
@@ -155,19 +287,27 @@ class MobileContainer extends React.Component {
                     <Icon name='sidebar' />
                   </Menu.Item>
                   <Menu.Item position='right'>
-                    <Button as='a' inverted>
+                  {!this.props.auth0.isLoading && !this.props.auth0.user && (
+                    <Button as='a' onClick={this.props.login}  inverted>
                       Log in
                     </Button>
-                    <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                      Sign Up
+                  )} 
+                  {!this.props.auth0.isLoading && this.props.auth0.user && (
+                    <Button as='a' onClick={this.props.logout} inverted style={{ marginLeft: '0.5em' }}>
+                      Logout
                     </Button>
+                  )} 
                   </Menu.Item>
                 </Menu>
               </Container>
-              <HomepageHeading mobile />
+              {!this.props.auth0.isLoading && !this.props.auth0.user && (
+                <HomepageHeading mobile />
+              )}  
             </Segment>
 
-            {children}
+            {!this.props.auth0.isLoading && !this.props.auth0.user && (
+                <HeaderSegment></HeaderSegment>
+            )}
           </Sidebar.Pusher>
         </Sidebar.Pushable>
       </Responsive>
@@ -176,142 +316,5 @@ class MobileContainer extends React.Component {
 }
 
 
-const ResponsiveContainer = ({ children }) => (
-  <div>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
-  </div>
-)
-
-
-
-const HomepageLayout = () => (
-  <ResponsiveContainer>
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Grid container stackable verticalAlign='middle'>
-        <Grid.Row>
-          <Grid.Column width={8}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              With over XXX vineyards let us guide you
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
-            </p>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              We Make Bananas That Can Dance
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even bananas can be
-              bioengineered.
-            </p>
-          </Grid.Column>
-          <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/assets/images/wireframe/white-image.png' />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column textAlign='center'>
-            <Button size='huge'>Check Them Out</Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
-    <Segment style={{ padding: '0em' }} vertical>
-      <Grid celled='internally' columns='equal' stackable>
-        <Grid.Row textAlign='center'>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "What a Company"
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
-          </Grid.Column>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "I shouldn't have gone with their competitor."
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src='/assets/images/avatar/large/nan.jpg' />
-              <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Container text>
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Breaking The Grid, Grabs Your Attention
-        </Header>
-        <p style={{ fontSize: '1.33em' }}>
-          Instead of focusing on content creation and hard work, we have learned how to master the
-          art of doing nothing by providing massive amounts of whitespace and generic content that
-          can seem massive, monolithic and worth your attention.
-        </p>
-        <Button as='a' size='large'>
-          Read More
-        </Button>
-        <Divider
-          as='h4'
-          className='header'
-          horizontal
-          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-          <a href='#'>Case Studies</a>
-        </Divider>
-        <Header as='h3' style={{ fontSize: '2em' }}>
-          Did We Tell You About Our Bananas?
-        </Header>
-        <p style={{ fontSize: '1.33em' }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-          it's really true. It took years of gene splicing and combinatory DNA research, but our
-          bananas can really dance.
-        </p>
-        <Button as='a' size='large'>
-          I'm Still Quite Interested
-        </Button>
-      </Container>
-    </Segment>
-    <Segment inverted vertical style={{ padding: '5em 0em' }}>
-      <Container>
-        <Grid divided inverted stackable>
-          <Grid.Row>
-            <Grid.Column width={3}>
-              <Header inverted as='h4' content='About' />
-              <List link inverted>
-                <List.Item as='a'>Sitemap</List.Item>
-                <List.Item as='a'>Contact Us</List.Item>
-                <List.Item as='a'>Religious Ceremonies</List.Item>
-                <List.Item as='a'>Gazebo Plans</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={3}>
-              <Header inverted as='h4' content='Services' />
-              <List link inverted>
-                <List.Item as='a'>Banana Pre-Order</List.Item>
-                <List.Item as='a'>DNA FAQ</List.Item>
-                <List.Item as='a'>How To Access</List.Item>
-                <List.Item as='a'>Favorite X-Men</List.Item>
-              </List>
-            </Grid.Column>
-            <Grid.Column width={7}>
-              <Header as='h4' inverted>
-                Footer Header
-              </Header>
-              <p>
-                Extra space for a call to action inside the footer that could help re-engage users.
-              </p>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
-    </Segment>
-  </ResponsiveContainer>
-)
-
-export default () => {
-  return (
-    <HomepageLayout />
-  );
-};
+export default connect(state => state, actions)(Auth0Connection);
 

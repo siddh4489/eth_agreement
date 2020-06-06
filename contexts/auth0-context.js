@@ -16,7 +16,7 @@ export class Auth0Provider extends Component {
 	config = {
 		domain: (process.env.REACT_APP_AUTH0_DOMAIN || 'dev-14avhjuy.auth0.com'),
 		client_id: (process.env.REACT_APP_AUTH0_CLIENT_ID || 'ZJ14f961zjftMYbOBnZPnEGJd3ZHyQJC'),
-		redirect_uri: window.location.origin
+		redirect_uri: 'http://localhost:3000/'
 	};
 
 	componentDidMount() {

@@ -331,7 +331,7 @@ const makeStore = () => _redux_store__WEBPACK_IMPORTED_MODULE_4__["default"]; //
 /*!*****************************!*\
   !*** ./redux/actionType.js ***!
   \*****************************/
-/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET */
+/*! exports provided: INCREMENT_COUNTER, DECREMENT_COUNTER, RESET, MYNAME, LOGIN */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -339,22 +339,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_COUNTER", function() { return INCREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DECREMENT_COUNTER", function() { return DECREMENT_COUNTER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RESET", function() { return RESET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MYNAME", function() { return MYNAME; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGIN", function() { return LOGIN; });
 //Action Types
 const INCREMENT_COUNTER = "incrementCounterType";
 const DECREMENT_COUNTER = "decrementCounterType";
-const RESET = "resetType"; //Action Creator
+const RESET = "resetType";
+const MYNAME = "nameType";
+const LOGIN = "loginType";
 
-/*export const incrementCounter = () => ({
-   type: INCREMENT_COUNTER
-});
+/***/ }),
 
-export const decrementCounter = () => ({
-    type: DECREMENT_COUNTER
-});
+/***/ "./redux/reducers/authReducer.js":
+/*!***************************************!*\
+  !*** ./redux/reducers/authReducer.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-export const reset = () => ({
-    type: RESET
-});*/
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actionType__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actionType */ "./redux/actionType.js");
+
+const initialState = {
+  authDetail: 'LOG'
+};
+
+const authReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case _actionType__WEBPACK_IMPORTED_MODULE_0__["LOGIN"]:
+      return Object.assign({}, state, {
+        authDetail: action.payload
+      });
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (authReducer);
 
 /***/ }),
 
@@ -370,7 +393,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actionType__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actionType */ "./redux/actionType.js");
 
 const initialState = {
-  mathVal: 0
+  mathVal: 0,
+  name: 'raj'
 };
 
 const counterReducer = (state = initialState, action) => {
@@ -387,7 +411,13 @@ const counterReducer = (state = initialState, action) => {
 
     case _actionType__WEBPACK_IMPORTED_MODULE_0__["RESET"]:
       return Object.assign({}, state, {
-        mathVal: action.payload
+        mathVal: action.payload,
+        name: action.payloadName
+      });
+
+    case _actionType__WEBPACK_IMPORTED_MODULE_0__["MYNAME"]:
+      return Object.assign({}, state, {
+        name: action.payload
       });
 
     default:
@@ -409,12 +439,15 @@ const counterReducer = (state = initialState, action) => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _counterReducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./counterReducer */ "./redux/reducers/counterReducer.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "redux");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _authReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./authReducer */ "./redux/reducers/authReducer.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "redux");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_2__);
 
 
-const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_1__["combineReducers"])({
-  counter: _counterReducer__WEBPACK_IMPORTED_MODULE_0__["default"]
+
+const rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_2__["combineReducers"])({
+  counter: _counterReducer__WEBPACK_IMPORTED_MODULE_0__["default"],
+  auth: _authReducer__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
