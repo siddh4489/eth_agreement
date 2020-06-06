@@ -50,7 +50,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 
 
- //import { useAuth0 } from '../../contexts/auth0-context';
+
 
 var HomepageHeading = function HomepageHeading(_ref) {
   var mobile = _ref.mobile;
@@ -208,7 +208,7 @@ var Auth0Connection = /*#__PURE__*/function (_React$Component) {
     _this.config = {
       domain: process.env.REACT_APP_AUTH0_DOMAIN || 'dev-14avhjuy.auth0.com',
       client_id: process.env.REACT_APP_AUTH0_CLIENT_ID || 'ZJ14f961zjftMYbOBnZPnEGJd3ZHyQJC',
-      redirect_uri: 'http://localhost:3000/'
+      redirect_uri: process.env.CALLBACK_URL || 'http://localhost:3000/'
     };
     _this.login = _this.login.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
     _this.logout = _this.logout.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
