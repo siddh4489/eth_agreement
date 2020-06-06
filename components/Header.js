@@ -62,11 +62,11 @@ class Auth0Connection extends React.Component {
        isAuthenticated: false,
        user: [],
     }
-
+    
     this.config = {
       domain: (process.env.REACT_APP_AUTH0_DOMAIN || 'dev-14avhjuy.auth0.com'),
       client_id: (process.env.REACT_APP_AUTH0_CLIENT_ID || '7Up0zsX4UTdTCL6330KIhTUJeVI1JUjO'),
-      redirect_uri: (process.env.CALLBACK_URL || 'https://eth-arcus.herokuapp.com/')
+      redirect_uri: (process.env.CALLBACK_URL || 'https://eth-arcus.herokuapp.com')
     };
     
     this.login = this.login.bind(this);
@@ -109,7 +109,7 @@ handleRedirectCallback = async () => {
   const { auth0Client} = this.state;
     //this.setState({data: e.target.value});
     auth0Client.loginWithRedirect({
-      redirect_uri: 'http://localhost:3000/'
+      redirect_uri: 'https://eth-arcus.herokuapp.com/'
     }).then(token => {
       auth0Client.getUser().then(user => {
         this.setState({ user});
