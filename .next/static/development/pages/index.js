@@ -205,10 +205,16 @@ var Auth0Connection = /*#__PURE__*/function (_React$Component) {
       isAuthenticated: false,
       user: []
     };
+    /*this.config = {
+      domain: (process.env.REACT_APP_AUTH0_DOMAIN || 'dev-14avhjuy.auth0.com'),
+      client_id: (process.env.REACT_APP_AUTH0_CLIENT_ID || '7Up0zsX4UTdTCL6330KIhTUJeVI1JUjO'),
+      redirect_uri: (process.env.CALLBACK_URL || 'https://eth-arcus.herokuapp.com')
+    };*/
+
     _this.config = {
       domain: process.env.REACT_APP_AUTH0_DOMAIN || 'dev-14avhjuy.auth0.com',
-      client_id: process.env.REACT_APP_AUTH0_CLIENT_ID || '7Up0zsX4UTdTCL6330KIhTUJeVI1JUjO',
-      redirect_uri: process.env.CALLBACK_URL || 'https://eth-arcus.herokuapp.com'
+      client_id: process.env.REACT_APP_AUTH0_CLIENT_ID || 'ZJ14f961zjftMYbOBnZPnEGJd3ZHyQJC',
+      redirect_uri: process.env.CALLBACK_URL || 'http://localhost:3000/'
     };
     _this.login = _this.login.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
     _this.logout = _this.logout.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this));
@@ -229,7 +235,7 @@ var Auth0Connection = /*#__PURE__*/function (_React$Component) {
       var auth0Client = this.state.auth0Client; //this.setState({data: e.target.value});
 
       auth0Client.loginWithRedirect({
-        redirect_uri: 'https://eth-arcus.herokuapp.com/'
+        redirect_uri: 'http://localhost:3000/'
       }).then(function (token) {
         auth0Client.getUser().then(function (user) {
           _this2.setState({
