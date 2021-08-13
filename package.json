@@ -16,7 +16,7 @@
     "ganache-cli": "^6.9.1",
     "history": "4.7.2",
     "mocha": "^4.1.0",
-    "next": "^9.4.1",
+    "next": "^11.1.0",
     "next-redux-wrapper": "^4.0.1",
     "next-routes": "^1.4.2",
     "react": "^16.13.1",
